@@ -4,40 +4,32 @@ import * as React from 'react';
 type AccordionPropsType = {
     titleValue: string
     collapsed: boolean
-};
-export const Accordion = (props: AccordionPropsType) => {
-    if (props.collapsed){
-        return (<>
-                <AccordionTitle title={props.titleValue}/>
-            </>
-        )
-    }
-    else {
-        return (<>
-                <AccordionTitle title={props.titleValue}/>
-                <AccordionBody />
-            </>
-        )
-    }
+    onChange: () => void
 
 };
+export const Accordion = (props: AccordionPropsType) => {
+    return <div>
+        <AccordionTitle title={props.titleValue} onChange={props.onChange}/>
+        {!props.collapsed && <AccordionBody/>}
+    </div>
+};
 type AccordionTitlePropsType = {
-    title:string
+    title: string
+    onChange: () => void
+
 }
 const AccordionTitle = (props: AccordionTitlePropsType) => {
     return (
-            <h3>{props.title}</h3>
+        <h3 onClick={props.onChange}>{props.title}</h3>
     );
 };
-type AccordionBodyPropsType = {
-
-}
+type AccordionBodyPropsType = {}
 const AccordionBody = (props: AccordionBodyPropsType) => {
     return (
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
     );
 };
